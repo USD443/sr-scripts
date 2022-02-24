@@ -1,17 +1,10 @@
 import os
 from scripts.move import move
+from scripts.rename import rename
+from scripts.colors import color
+
 
 script_version = 1.0
-
-term_colors = {
-    'BLUE': '\033[94m',
-    'RED': '\033[91m',
-    "YELLOW": '\033[93m',
-    "GREEN": '\033[92m',
-    'CLEAR': '\033[0m',
-    "BOLD": '\033[1m',
-    "UNDERLINE": '\033[4m'
-}
 
 
 def cls():
@@ -20,8 +13,7 @@ def cls():
 
 def welcome():
     cls()
-    print(
-        f"{term_colors['BOLD']}{term_colors['GREEN']}Student Records Scripts{term_colors['CLEAR']}")
+    print(color("green", "Student Records Scripts"))
     print(f"Created by Carlos Rodriguez")
     print(f"Version {script_version}\n\n")
 
@@ -30,18 +22,25 @@ def launch_script(num: int):
     welcome()
     if num == 1:
         move()
+    elif num == 2:
+        rename()
     else:
-        print("2 was picked")
+        print(
+            f"{color('yellow', 'Please enter a valid option')}{color('red', ' (script exited)')}")
 
 
 def get_script():
-    print(
-        f"{term_colors['UNDERLINE']}What would you like to do?{term_colors['CLEAR']}\n")
-    print(f"{term_colors['BLUE']}1: Move records")
-    print(f"2: Rename records{term_colors['CLEAR']}\n\n")
+    print(color('underline', 'What would you like to do?\n'))
+    print(color('blue', '[1]: Move Records'))
+    print(color('blue', '[2]: Rename Records'))
+
     user_choice = input(
-        f"{term_colors['BOLD']}Enter the number corresponding to the command: {term_colors['CLEAR']}")
-    launch_script(int(user_choice))
+        color('bold', '\nEnter the number corresponding to the command: '))
+    try:
+        launch_script(int(user_choice))
+    except ValueError:
+        print(
+            f"{color('yellow', 'Please use only numbers')}{color('red', ' (script exited)')}")
 
 
 welcome()
