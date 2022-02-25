@@ -15,7 +15,7 @@ def welcome():
     cls()
     print(color("green", "Student Records Scripts"))
     print(f"Created by Carlos Rodriguez")
-    print(f"Version {script_version}\n\n")
+    print(f"Version {script_version}\n")
 
 
 def launch_script(num: int):
